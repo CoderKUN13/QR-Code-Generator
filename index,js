@@ -1,0 +1,13 @@
+import input from '@inquirer/input';
+import * as qr from "qr-image";
+import { createWriteStream } from 'fs';
+
+
+const url = await input({message: 'Enter Your URL: '});
+
+var qr_png = qr.image(url, {type: 'png'});
+qr_png.pipe(createWriteStream('qr.png'));
+
+var png_string = qr.imageSync(url, {type: 'png'});
+
+console.log("QR Generated Successfully");
